@@ -1121,10 +1121,10 @@ function Speed_Library:SetNotification(Config)
   })
 
   local TextLabel = Custom:Create("TextLabel", {
-    Font = Enum.Font.GothamBold,
+    Font = Enum.Font.GothamBlack,
     Text = Title,
-    TextColor3 = Color3.fromRGB(255, 255, 255),
-    TextSize = 14,
+    TextColor3 = Custom.ColorRGB,
+    TextSize = 16,
     TextXAlignment = Enum.TextXAlignment.Left,
     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
     BackgroundTransparency = 0.999,
@@ -1291,7 +1291,7 @@ function Speed_Library:CreateWindow(Config)
   local Main = Custom:Create("Frame", {
     AnchorPoint = Vector2.new(0.5, 0.5),
     BackgroundColor3 = Color3.fromRGB(10, 10, 12),
-    BackgroundTransparency = 0.05,
+    BackgroundTransparency = 0.12,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
     Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -1303,7 +1303,8 @@ function Speed_Library:CreateWindow(Config)
 
   Custom:Create("UIStroke", {
     Color = Color3.fromRGB(255, 45, 60),
-    Thickness = 1.6
+    Thickness = 1.4,
+    Transparency = 0.25
   }, Main)
 
   local Top = Custom:Create("Frame", {
@@ -1316,10 +1317,10 @@ function Speed_Library:CreateWindow(Config)
   }, Main)
 
   local TextLabel = Custom:Create("TextLabel", {
-    Font = Enum.Font.GothamBold,
+    Font = Enum.Font.GothamBlack,
     Text = Title,
-    TextColor3 = Color3.fromRGB(255, 255, 255),
-    TextSize = 14,
+    TextColor3 = Custom.ColorRGB,
+    TextSize = 16,
     TextXAlignment = Enum.TextXAlignment.Left,
     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
     BackgroundTransparency = 0.9990000128746033,
@@ -1354,31 +1355,35 @@ function Speed_Library:CreateWindow(Config)
     Font = Enum.Font.GothamBold,
     Text = "X",
     TextColor3 = Color3.fromRGB(255, 255, 255),
-    TextSize = 18,
+    TextSize = 14,
     AnchorPoint = Vector2.new(1, 0.5),
-    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundTransparency = 0.9990000128746033,
+    BackgroundColor3 = Custom.ColorRGB,
+    BackgroundTransparency = 0.35,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
     Position = UDim2.new(1, -8, 0.5, 0),
-    Size = UDim2.new(0, 25, 0, 25),
+    Size = UDim2.new(0, 26, 0, 22),
     Name = "Close"
   }, Top)
+  Custom:Create("UICorner", { CornerRadius = UDim.new(0, 8) }, Close)
+  Custom:Create("UIStroke", { Color = Custom.ColorRGB, Thickness = 1, Transparency = 0.4 }, Close)
 
   local Min = Custom:Create("TextButton", {
     Font = Enum.Font.GothamBold,
-    Text = "-", 
+    Text = "-",
     TextColor3 = Color3.fromRGB(255, 255, 255),
     TextSize = 18,
     AnchorPoint = Vector2.new(1, 0.5),
-    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundTransparency = 0.9990000128746033,
+    BackgroundColor3 = Color3.fromRGB(40, 40, 46),
+    BackgroundTransparency = 0.25,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
     Position = UDim2.new(1, -42, 0.5, 0),
-    Size = UDim2.new(0, 25, 0, 25),
+    Size = UDim2.new(0, 26, 0, 22),
     Name = "Min"
 }, Top)
+  Custom:Create("UICorner", { CornerRadius = UDim.new(0, 8) }, Min)
+  Custom:Create("UIStroke", { Color = Color3.fromRGB(70,70,76), Thickness = 1, Transparency = 0.4 }, Min)
 
   local LayersTab = Custom:Create("Frame", {
     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -1390,9 +1395,46 @@ function Speed_Library:CreateWindow(Config)
     Name = "LayersTab"
   }, Main)
 
+  LayersTab.BackgroundColor3 = Color3.fromRGB(16, 16, 20)
+  LayersTab.BackgroundTransparency = 0.2
   Custom:Create("UICorner", {
-    CornerRadius = UDim.new(0, 10)
+    CornerRadius = UDim.new(0, 12)
   }, LayersTab)
+  Custom:Create("UIStroke", { Color = Color3.fromRGB(40,40,46), Thickness = 1, Transparency = 0.4 }, LayersTab)
+
+  -- Search bar at top of tab list
+  local TabSearch = Custom:Create("Frame", {
+    BackgroundColor3 = Color3.fromRGB(28, 28, 34),
+    BackgroundTransparency = 0.1,
+    BorderSizePixel = 0,
+    Position = UDim2.new(0, 6, 0, 6),
+    Size = UDim2.new(1, -12, 0, 28),
+    Name = "TabSearch"
+  }, LayersTab)
+  Custom:Create("UICorner", { CornerRadius = UDim.new(0, 8) }, TabSearch)
+  Custom:Create("UIStroke", { Color = Color3.fromRGB(60,60,66), Thickness = 1, Transparency = 0.5 }, TabSearch)
+  Custom:Create("ImageLabel", {
+    Image = (LucideIcons["lucide-search"] or ""),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 8, 0.5, -7),
+    Size = UDim2.new(0, 14, 0, 14),
+    ImageColor3 = Color3.fromRGB(180,180,180),
+    Name = "Icon"
+  }, TabSearch)
+  local TabSearchBox = Custom:Create("TextBox", {
+    Font = Enum.Font.Gotham,
+    PlaceholderText = "Search",
+    Text = "",
+    PlaceholderColor3 = Color3.fromRGB(140,140,140),
+    TextColor3 = Color3.fromRGB(235,235,235),
+    TextSize = 12,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 28, 0, 0),
+    Size = UDim2.new(1, -34, 1, 0),
+    ClearTextOnFocus = false,
+    Name = "TabSearchBox"
+  }, TabSearch)
 
   Custom:Create("Frame", {
     AnchorPoint = Vector2.new(0.5, 0),
@@ -1420,10 +1462,10 @@ function Speed_Library:CreateWindow(Config)
   }, Layers)
 
   local NameTab = Custom:Create("TextLabel", {
-    Font = Enum.Font.GothamBold,
+    Font = Enum.Font.GothamBlack,
     Text = "",
     TextColor3 = Color3.fromRGB(255, 255, 255),
-    TextSize = 24,
+    TextSize = 22,
     TextWrapped = true,
     TextXAlignment = Enum.TextXAlignment.Left,
     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -1467,7 +1509,8 @@ function Speed_Library:CreateWindow(Config)
     BackgroundTransparency = 0.9990000128746033,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
-    Size = UDim2.new(1, 0, 1, -10),
+    Position = UDim2.new(0, 0, 0, 40),
+    Size = UDim2.new(1, 0, 1, -50),
     Name = "ScrollTab"
   }, LayersTab)
 
@@ -1490,6 +1533,19 @@ function Speed_Library:CreateWindow(Config)
 
   ScrollTab.ChildAdded:Connect(UpdateSize)
   ScrollTab.ChildRemoved:Connect(UpdateSize)
+
+  TabSearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+    local q = string.lower(TabSearchBox.Text)
+    for _, t in pairs(ScrollTab:GetChildren()) do
+      if t:IsA("Frame") and t.Name == "Tab" then
+        local nm = t:FindFirstChild("TabName")
+        if nm then
+          t.Visible = q == "" or string.find(string.lower(nm.Text), q, 1, true) ~= nil
+        end
+      end
+    end
+    UpdateSize()
+  end)
 
   Min.Activated:Connect(function()
 		CircleClick(Min, Player:GetMouse().X, Player:GetMouse().Y)
@@ -1663,12 +1719,12 @@ function Speed_Library:CreateWindow(Config)
     })
 
     local Tab = Custom:Create("Frame", {
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-			BackgroundTransparency = CountTab == 0 and 0.92 or 0.999,
+			BackgroundColor3 = Custom.ColorRGB,
+			BackgroundTransparency = CountTab == 0 and 0.7 or 0.999,
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
 			BorderSizePixel = 0,
 			LayoutOrder = CountTab,
-			Size = UDim2.new(1, 0, 0, 30),
+			Size = UDim2.new(1, 0, 0, 32),
 			Name = "Tab",
 			Parent = ScrollTab
 		})
@@ -1724,11 +1780,12 @@ function Speed_Library:CreateWindow(Config)
   
       local ChooseFrame = Custom:Create("Frame", {
         BackgroundColor3 = Custom.ColorRGB,
-        BorderColor3 = Color3.fromRGB(0, 0, 0),
+        BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Position = UDim2.new(0, 2, 0, 9),
-        Size = UDim2.new(0, 1, 0, 12),
+        Size = UDim2.new(0, 0, 0, 12),
         Name = "ChooseFrame",
+        Visible = false,
       }, Tab)
   
       Custom:Create("UIStroke", {
@@ -1757,11 +1814,11 @@ function Speed_Library:CreateWindow(Config)
       if FrameChoose and Tab.LayoutOrder ~= LayersPageLayout.CurrentPage.LayoutOrder then
         for _, TabFrame in pairs(ScrollTab:GetChildren()) do
           if TabFrame.Name == "Tab" then
-            TweenService:Create(TabFrame, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.999}):Play()
+            TweenService:Create(TabFrame, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.999, BackgroundColor3 = Custom.ColorRGB}):Play()
           end
         end
   
-        local _TabT = TweenService:Create(Tab, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.92})
+        local _TabT = TweenService:Create(Tab, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.7, BackgroundColor3 = Custom.ColorRGB})
         local _FTween = TweenService:Create(FrameChoose, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = UDim2.new(0, 2, 0, 9 + (33 * Tab.LayoutOrder)) })
 
         _TabT:Play()
@@ -1800,8 +1857,8 @@ function Speed_Library:CreateWindow(Config)
   
       local SectionReal = Custom:Create("Frame", {
         AnchorPoint = Vector2.new(0.5, 0),
-        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-        BackgroundTransparency = 0.935,
+        BackgroundColor3 = Custom.ColorRGB,
+        BackgroundTransparency = 0.82,
         BorderColor3 = Color3.fromRGB(0, 0, 0),
         BorderSizePixel = 0,
         LayoutOrder = 1,
@@ -1854,8 +1911,8 @@ function Speed_Library:CreateWindow(Config)
       local SectionTitle = Custom:Create("TextLabel", {
         Font = Enum.Font.GothamBold,
         Text = Title,
-        TextColor3 = Color3.fromRGB(230, 230, 230),
-        TextSize = 13,
+        TextColor3 = Color3.fromRGB(245, 245, 245),
+        TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Left,
         TextYAlignment = Enum.TextYAlignment.Top,
         AnchorPoint = Vector2.new(0, 0.5),
@@ -1898,10 +1955,12 @@ function Speed_Library:CreateWindow(Config)
         Size = UDim2.new(1, 0, 0, 100),
         Name = "SectionAdd"
       }, Section)
-  
+      SectionAdd.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
+      SectionAdd.BackgroundTransparency = 0.35
       Custom:Create("UICorner", {
         CornerRadius = UDim.new(0, 10)
       }, SectionAdd)
+      Custom:Create("UIStroke", { Color = Color3.fromRGB(45,45,50), Thickness = 1, Transparency = 0.55 }, SectionAdd)
     
       Custom:Create("UIListLayout", {
         Padding = UDim.new(0, 3),
