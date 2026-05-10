@@ -433,7 +433,7 @@ function Speed_Library:CreateWindow(Config)
   local Main = Custom:Create("Frame", {
     AnchorPoint = Vector2.new(0.5, 0.5),
     BackgroundColor3 = Color3.fromRGB(10, 10, 14),
-    BackgroundTransparency = 0.35,
+    BackgroundTransparency = 0.05,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
     Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -539,7 +539,7 @@ function Speed_Library:CreateWindow(Config)
   Custom:Create("Frame", {
     AnchorPoint = Vector2.new(0.5, 0),
     BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundTransparency = 0.6,
+    BackgroundTransparency = 0.85,
     BorderColor3 = Color3.fromRGB(0, 0, 0),
     BorderSizePixel = 0,
     Position = UDim2.new(0.5, 0, 0, 38),
@@ -1188,7 +1188,7 @@ function Speed_Library:CreateWindow(Config)
 
         local Seperator = Custom:Create("Frame", {
           BackgroundColor3 = Color3.fromRGB(70, 70, 70),
-          BackgroundTransparency = 0.35,
+          BackgroundTransparency = 0.05,
           BorderColor3 = Color3.fromRGB(0, 0, 0),
           BorderSizePixel = 1,
           LayoutOrder = ItemCount,
